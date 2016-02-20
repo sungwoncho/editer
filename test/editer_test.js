@@ -176,5 +176,16 @@ describe(".insert", function() {
 
       expect(result).to.equal("Whoa, whoa, whoa, hey, whoa... stop right there.");
     });
+
+    it("can pass asNewLine option within a condition in 'or'", function() {
+      var target = "Whoa, whoa, whoa, whoa... stop right there.";
+      var options = {or: [
+        {before: {regex: /unicorn/ig, last: true}},
+        {after: {regex: /whoa\.\.\.\s/ig}, asNewLine: true},
+      ]};
+      var result = editer.insert("hey.", target, options);
+
+      expect(result).to.equal("Whoa, whoa, whoa, whoa... \nhey.\nstop right there.");
+    });
   });
 });
