@@ -7,7 +7,10 @@ A high level multiline string manipulation library.
 
 Using editer, you can:
 
-* insert a string after a certain line in a multiline string
+* insert a string before/after a certain line in a multiline string optionally
+as a new line
+* insert a string before/after nth match of a regex in a multiline string
+optionally as a new line
 
 ## Installation
 
@@ -16,23 +19,24 @@ Using editer, you can:
 
 ## Usage
 
+Here are some examples of what editer can do.
 
 ### Example 1
 
-Insert a string after a certain line number.
+Insert a new line after a certain line number.
 
 ```js
 var editer = require('editer');
 var target = 'line 1\nline 3';
 
-var result = editer.insert('line 2', target, {after: {line: 1}});
+var result = editer.insert('line 2', target, {after: {line: 1}, asNewLine: true});
 console.log(result);
 // => 'line 1\nline 2\nline 3';
 ```
 
 ### Example 2
 
-Insert a string as a new line after the last occurrence of regex.
+Insert a string after the second occurrence of regex.
 
 ```target.js
 import create from './create';
@@ -52,9 +56,9 @@ var target = fs.readFileSync('./target');
 var result = editer.insert("import modify from './modify'", target, {
   after: {
     regex: /import .*$/,
-    last: true,
-    newLine: true
-  }
+    occurrence: 2,
+  },
+  asNewLine: true
 });
 console.log(result);
 // import create from './create';
