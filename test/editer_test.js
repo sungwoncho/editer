@@ -90,4 +90,33 @@ describe(".insert", function() {
       expect(result).to.equal("I love you\nHoney Bunny\nNooby\n Babby.");
     });
   });
+
+  describe("before.regex", function() {
+    it("inserts a string to target before the first match of regex", function() {
+      var target = "It's Zed's.\nWho's Zed?";
+      var result = editer.insert("... ", target, {before: {regex: /Zed.*\n/g}});
+
+      expect(result).to.equal("It's ... Zed's.\nWho's Zed?");
+    });
+  });
+
+  describe("before.regex before.occurrence", function() {
+    it("inserts a string to target before the nth match of regex", function() {
+      var target = "I love you\nHoney Bunny.";
+      var options = {before: {regex: /[a-zA-z]{5}/g, occurrence: 2}};
+      var result = editer.insert("Nooby ", target, options);
+
+      expect(result).to.equal("I love you\nHoney Nooby Bunny.");
+    });
+  });
+
+  describe("before.regex before.occurrence asNewLine", function() {
+    it("inserts a string to target before the nth match of regex as a new line", function() {
+      var target = "I love you\nHoney Bunny.";
+      var options = {before: {regex: /[a-zA-z]{5}/g, occurrence: 2}, asNewLine: true};
+      var result = editer.insert("Nooby", target, options);
+
+      expect(result).to.equal("I love you\nHoney \nNooby\nBunny.");
+    });
+  });
 });
