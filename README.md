@@ -1,5 +1,7 @@
 # editer
 
+[![Build Status](https://travis-ci.org/sungwoncho/editer.svg?branch=master)](https://travis-ci.org/sungwoncho/editer)
+
 A high level multiline string manipulation library.
 
 
