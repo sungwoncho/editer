@@ -45,4 +45,49 @@ describe(".insert", function() {
       expect(result).to.equal('line 0\nline 1\nline 2\nline 3');
     });
   });
+
+  describe("after.regex", function() {
+    it("inserts a string to target after the first match of regex ending with newline", function() {
+      var target = "It's Zed's.\nWho's Zed?";
+      var result = editer.insert(' Baby.', target, {after: {regex: /Zed.*\n/g}});
+
+      expect(result).to.equal("It's Zed's. Baby.\nWho's Zed?");
+    });
+
+    it("inserts a string to target after the first match of regex", function() {
+      var target = "It's Zed's.\nWho's Zed?";
+      var result = editer.insert("oo", target, {after: {regex: /Zed/g}});
+
+      expect(result).to.equal("It's Zedoo's.\nWho's Zed?");
+    });
+  });
+
+  describe("after.regex after.occurrence", function() {
+    it("inserts a string to target after the nth match", function() {
+      var target = "It's Zed's.\nWho's Zed?";
+      var options = {after: {regex: /Zed/g, occurrence: 2}};
+      var result = editer.insert("oo", target, options);
+
+      expect(result).to.equal("It's Zed's.\nWho's Zedoo?");
+    });
+  });
+
+  describe("after.regex asNewLine", function() {
+    it("inserts a string to target after the first match of regex as a new line", function() {
+      var target = "I love you\nHoney Bunny.";
+      var result = editer.insert('Nooby ', target, {after: {regex: /[a-zA-z]{5}\s/g}, asNewLine: true});
+
+      expect(result).to.equal("I love you\nHoney \nNooby \nBunny.");
+    });
+  });
+
+  describe("after.regex after.occurrence asNewLine", function() {
+    it("inserts a string to target after the nth occurrence of regex as a new line", function() {
+      var target = "I love you\nHoney Bunny Babby.";
+      var options = {after: {regex: /[a-zA-z]{5}/g, occurrence: 2}, asNewLine: true};
+      var result = editer.insert('Nooby', target, options);
+
+      expect(result).to.equal("I love you\nHoney Bunny\nNooby\n Babby.");
+    });
+  });
 });
