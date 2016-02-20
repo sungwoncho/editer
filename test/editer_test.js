@@ -72,6 +72,16 @@ describe(".insert", function() {
     });
   });
 
+  describe("after.regex after.last", function() {
+    it("inserts a string to target after the last match", function() {
+      var target = "Whoa, whoa, whoa, whoa... stop right there.";
+      var options = {after: {regex: /whoa/ig, last: true}};
+      var result = editer.insert(", aww", target, options);
+
+      expect(result).to.equal("Whoa, whoa, whoa, whoa, aww... stop right there.");
+    });
+  });
+
   describe("after.regex asNewLine", function() {
     it("inserts a string to target after the first match of regex as a new line", function() {
       var target = "I love you\nHoney Bunny.";
@@ -127,6 +137,16 @@ describe(".insert", function() {
       var result = editer.insert("Nooby", target, options);
 
       expect(result).to.equal("I love you\nHoney \nNooby\nBunny.");
+    });
+  });
+
+  describe("before.regex before.last", function() {
+    it("inserts a string to target before the last match of regex", function() {
+      var target = "Whoa, whoa, whoa, whoa... stop right there.";
+      var options = {before: {regex: /whoa/ig, last: true}};
+      var result = editer.insert("my god, ", target, options);
+
+      expect(result).to.equal("Whoa, whoa, whoa, my god, whoa... stop right there.");
     });
   });
 });
