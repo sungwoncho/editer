@@ -149,4 +149,18 @@ describe(".insert", function() {
       expect(result).to.equal("Whoa, whoa, whoa, my god, whoa... stop right there.");
     });
   });
+
+  describe("or", function() {
+    it("performs the second operation if the first one's condition does not yield match", function() {
+      var target = "Whoa, whoa, whoa, whoa... stop right there.";
+      var options = {or: [
+        {before: {regex: /unicorn/ig, last: true}},
+        {after: {regex: /whoa,\s/ig, occurrence: 3}},
+        {after: {regex: /stop/i}}
+      ]};
+      var result = editer.insert("hey, ", target, options);
+
+      expect(result).to.equal("Whoa, whoa, whoa, hey, whoa... stop right there.");
+    });
+  });
 });
