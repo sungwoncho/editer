@@ -36,4 +36,13 @@ describe(".insert", function() {
       expect(result).to.equal('this is line 1\nline 2\nline 3');
     });
   });
+
+  describe("before.line asNewLine", function() {
+    it("inserts a string to target before the line as a new line", function() {
+      var target = 'line 0\nline 2\nline 3';
+      var result = editer.insert('line 1', target, {before: {line: 2}, asNewLine: true});
+
+      expect(result).to.equal('line 0\nline 1\nline 2\nline 3');
+    });
+  });
 });
