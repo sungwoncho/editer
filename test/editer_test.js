@@ -100,6 +100,16 @@ describe(".insert", function() {
     });
   });
 
+  describe("before.regex asNewLine", function() {
+    it("inserts a string to target before the first match of regex as a new line", function() {
+      var target = "It's Zed's.\nWho's Zed?";
+      var options = {before: {regex: /Zed.*\n/g}, asNewLine: true};
+      var result = editer.insert("...", target, options);
+
+      expect(result).to.equal("It's \n...\nZed's.\nWho's Zed?");
+    });
+  });
+
   describe("before.regex before.occurrence", function() {
     it("inserts a string to target before the nth match of regex", function() {
       var target = "I love you\nHoney Bunny.";
