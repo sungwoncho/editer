@@ -1,6 +1,6 @@
 {
   "name": "editer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A high level multiline string manipulation library",
   "main": "index.js",
   "scripts": {
