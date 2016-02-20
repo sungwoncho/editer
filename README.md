@@ -131,7 +131,7 @@ provided, `target` is modified at the first occurrence of the `regex`.
 
 **last**
 
-* type: Boolean
+* type: `Boolean`
 * if set to true, modify the `target` at last occurrence of the regex.
 
 *Example*
@@ -172,7 +172,7 @@ console.log(result);
 
 #### asNewLine
 
-* type: Boolean
+* type: `Boolean`
 * default: `false`
 * insert the `string` as a new line to the `target`.
 
