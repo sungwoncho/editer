@@ -121,7 +121,8 @@ possible key-value pairs.
 
 * type: `RegExp`
 * the regex to be matched in the target. You may optionally provide `occurrence`
-if providing this option. See below.
+if providing this option. See below. All regex should have **global** flag, as
+Editer uses [lcoater](https://github.com/sungwoncho/locater) internally.
 
 **occurrence**
 
