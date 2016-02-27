@@ -243,6 +243,15 @@ describe(".remove", function() {
     });
   });
 
+  describe("before.regex", function() {
+    it("does not do anything if there is no match", function() {
+      var target = 'I love you\n Honey, Bunny';
+      var result = editer.remove('unicorn', target, {before: {regex: /Bunny/g}, onSameLine: false, multi: false});
+
+      expect(result).to.equal('I love you\n Honey, Bunny');
+    });
+  });
+
   describe("before.regex multi", function() {
     it("removes all occurrences of the string in the target before the regex", function() {
       var target = 'Hey Charlie you asleep asleep?\nYo Charlie are you asleep?';
