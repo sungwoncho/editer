@@ -187,6 +187,50 @@ console.log(result);
 // => "It's \n...\nZed's.\nWho's Zed?"
 ```
 
+### remove(string, target, options)
+
+Removes `string` from the `target` at the position specified by `options`.
+
+**string**
+
+* type: `String`
+* a string to be removed from the target
+
+**target**
+
+* type: `String`
+* a string to be modified by removing `string`
+
+**options**
+
+* type: `Object`
+* an object specifying the position at which the `string` is to be removed from
+`target`.
+
+At top level, it can have the following keys:
+
+* `before`
+* `after`
+* `or`
+* `multi`
+* `onSameLine`
+
+All `before`, `after`, and `or` options are similar to those of `insert` API.
+The only difference is that here they support only regex, not line number.
+
+#### multi
+
+* type: `Boolean`
+* default: `false`
+* Remove all occurrences of the `string` in the section of the `target` scoped
+by the condition, and other options such as `onSameLine`.
+
+#### onSameLine
+
+* type: `Boolean`
+* default: `false`
+* Scope the removal to the same line as the match of the regex in the target.
+
 
 ## License
 
