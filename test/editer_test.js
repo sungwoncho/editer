@@ -189,3 +189,92 @@ describe(".insert", function() {
     });
   });
 });
+
+describe(".remove", function() {
+  describe("after.regex", function() {
+    it("removes a string in the target after the regex", function() {
+      var target = 'I love you\n Honey Bunny, , , \nNooby.';
+      var result = editer.remove(',', target, {after: {regex: /Bunny/g}, multi: false});
+
+      expect(result).to.equal('I love you\n Honey Bunny , , \nNooby.');
+    });
+  });
+
+  describe("after.regex multi", function() {
+    it("removes all occurrences of the string in the target after the regex", function() {
+      var target = 'Hey Charlie you asleep?\n Charlie are you asleep?';
+      var result = editer.remove(' asleep', target, {after: {regex: /Hey/g}, multi: true});
+
+      expect(result).to.equal('Hey Charlie you?\n Charlie are you?');
+    });
+  });
+
+  describe("after.regex onSameline", function() {
+    it("does not remove the string if outside the line where the regex matches", function() {
+      var target = 'I love you\n Honey Bunny\n Bobby Nooby';
+      var result = editer.remove('Bobby', target, {after: {regex: /Honey/g}, onSameLine: true});
+
+      expect(result).to.equal('I love you\n Honey Bunny\n Bobby Nooby');
+    });
+
+    it("removes a string in the target before the regex match if on the same line", function() {
+      var target = 'I love you\n Honey Bunny Bobby Nooby';
+      var result = editer.remove('Bobby ', target, {after: {regex: /Honey/g}, onSameLine: true, multi: false});
+
+      expect(result).to.equal('I love you\n Honey Bunny Nooby');
+    });
+  });
+
+  describe("after.regex onSameLine multi", function() {
+    it("removes all occurrences of the string in the target after the regex on the same line", function() {
+      var target = 'Hey Charlie you asleep hey hey?\n Charlie are you asleep?';
+      var result = editer.remove(' hey', target, {after: {regex: /Hey/g}, onSameLine: true, multi: true});
+
+      expect(result).to.equal('Hey Charlie you asleep?\n Charlie are you asleep?');
+    });
+  });
+
+  describe("before.regex", function() {
+    it("removes a string in the target before the regex", function() {
+      var target = 'I love you\n Honey, Bunny';
+      var result = editer.remove(',', target, {before: {regex: /Bunny/g}, onSameLine: false, multi: false});
+
+      expect(result).to.equal('I love you\n Honey Bunny');
+    });
+  });
+
+  describe("before.regex multi", function() {
+    it("removes all occurrences of the string in the target before the regex", function() {
+      var target = 'Hey Charlie you asleep asleep?\nYo Charlie are you asleep?';
+      var result = editer.remove(' asleep', target, {before: {regex: /Yo/g}, onSameLine: false, multi: true});
+
+      expect(result).to.equal('Hey Charlie you?\nYo Charlie are you asleep?');
+    });
+  });
+
+  describe("before.regex onSameLine", function() {
+    it("does not remove a string in the target before the regex match if not on the same line", function() {
+      var target = 'I love you\n Honey, Bunny';
+      var result = editer.remove('you', target, {before: {regex: /Bunny/g}, onSameLine: true, multi: false});
+
+      expect(result).to.equal('I love you\n Honey, Bunny');
+    });
+
+    it("removes a string in the target before the regex match if on the same line", function() {
+      var target = 'I love\nyou Honey, Bunny';
+      var result = editer.remove('you', target, {before: {regex: /Bunny/g}, onSameLine: true, multi: false});
+
+      expect(result).to.equal('I love\n Honey, Bunny');
+    });
+  });
+
+
+  describe("before.regex onSameLine multi", function() {
+    it("removes all occurrences of the string in the target before the regex on the smae line", function() {
+      var target = 'Hey Charlie you asleep asleep? Hey, Charlie.\nHey, Hey, Yo, Charlie are you asleep?';
+      var result = editer.remove('Hey, ', target, {before: {regex: /Yo/g}, onSameLine: true, multi: true});
+
+      expect(result).to.equal('Hey Charlie you asleep asleep? Hey, Charlie.\nYo, Charlie are you asleep?');
+    });
+  });
+});
