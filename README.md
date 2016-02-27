@@ -5,7 +5,7 @@
 A high level multiline string manipulation library.
 
 
-## What does it do
+## What it does
 
 Using editer, you can:
 
@@ -13,6 +13,8 @@ Using editer, you can:
 as a new line
 * insert a string before/after nth match of a regex in a multiline string
 optionally as a new line
+* remove a string from a multiline string before/after a regex matches,
+optionally from the same line and/or multiple times.
 
 ## Installation
 
